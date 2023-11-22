@@ -37,10 +37,6 @@ public class Main {
 
                 System.out.println("Qual sua idade?");
                 int age = sc.nextInt();
-<<<<<<< HEAD
-=======
-                // validar maioridade - Nayara
->>>>>>> a83dba2ee978d4921aa6e4f812c7a63f75cc67e2
 
                 System.out.print("Saldo inicial: ");
                 double balance = sc.nextDouble();
@@ -84,7 +80,6 @@ public class Main {
                             System.out.println("-----------------------------------------------------------------------");
                             break;
                         case 2:
-<<<<<<< HEAD
                             System.out.print("Informe o valor que deseja sacar: R$ ");
                             double amountWithdraw = sc.nextDouble();
                             try {
@@ -101,15 +96,6 @@ public class Main {
                         case 4:
                             System.out.println(physicalPerson.data());
                             System.out.println("-----------------------------------------------------------------------");
-=======
-                            // Lógica para sacar -
-                            break;
-                        case 3:
-                            // Lógica para consultar saldo - Nayara
-                            break;
-                        case 4:
-                            // Lógica para consultar dados de usuário - Junior
->>>>>>> a83dba2ee978d4921aa6e4f812c7a63f75cc67e2
                             break;
                         default:
                             System.out.println("Opção inválida. Tente novamente.");
@@ -174,19 +160,12 @@ public class Main {
                             System.out.println("-----------------------------------------------------------------------");
                             break;
                         case 3:
-<<<<<<< HEAD
                             System.out.printf("O atual saldo da conta é: R$ %.2f%n", legalPerson.getBalance());
                             System.out.println("-----------------------------------------------------------------------");
                             break;
                         case 4:
                             System.out.println(legalPerson.data());
                             System.out.println("-----------------------------------------------------------------------");
-=======
-                            // Lógica para consultar saldo - Nayara
-                            break;
-                        case 4:
-                            // Lógica para consultar dados de usuário - Junior
->>>>>>> a83dba2ee978d4921aa6e4f812c7a63f75cc67e2
                             break;
                         default:
                             System.out.println("Opção inválida. Tente novamente.");
