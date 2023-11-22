@@ -1,5 +1,9 @@
 package Program;
 
+import Entities.LegalPerson;
+import Entities.PhysicalPerson;
+import exceptions.BusinessException;
+
 import java.util.Scanner;
 
 public class Main {
@@ -8,15 +12,18 @@ public class Main {
         Scanner sc2 = new Scanner(System.in);
         boolean isMenuActive = true;
 
-        System.out.println("-------------------------------------------------");
-        System.out.println("             Bem vindo ao Banco Azul             ");
-        System.out.println("-------------------------------------------------");
-        System.out.println("Para ter acesso aos serviços, cadastre sua conta!");
-        System.out.println("-------------------------------------------------");
+
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("                        Bem vindo ao Banco Azul                        ");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("           Para ter acesso aos serviços, cadastre sua conta!"           );
+        System.out.println("-----------------------------------------------------------------------");
         System.out.println("Voce é: \n" +
                 "Pessoa Física → Digite 1\n" +
                 "Pessoa Jurídica → Digite 2"
         );
+
+        System.out.println("-----------------------------------------------------------------------");
 
         int personOfType = sc.nextInt();
 
@@ -30,47 +37,69 @@ public class Main {
 
                 System.out.println("Qual sua idade?");
                 int age = sc.nextInt();
-                // validar maioridade
 
                 System.out.print("Saldo inicial: ");
                 double balance = sc.nextDouble();
 
                 System.out.print("Limite de saque: ");
                 double withdrawLimit = sc.nextDouble();
-                System.out.println("-------------------------------------------------");
 
-                System.out.println("O que você deseja fazer?");
+                System.out.println("-----------------------------------------------------------------------");
+
+                PhysicalPerson physicalPerson = new PhysicalPerson(name, balance, withdrawLimit, cpf, age);
+
+                try {
+                    physicalPerson.period();
+                } catch (BusinessException e) {
+                    System.out.println(e.getMessage());
+                    break;
+                }
 
                 while (isMenuActive) {
+                    System.out.println("O que você deseja fazer?");
                     System.out.println("[1] Depositar\n" +
                             "[2] Sacar\n" +
                             "[3] Consultar saldo\n" +
                             "[4] Consultar dados de usuário\n" +
                             "[0] Encerrar");
-                    System.out.println("--------------------------------------");
+
+                    System.out.println("-----------------------------------------------------------------------");
 
                     int choice = sc.nextInt();
-                    System.out.println("--------------------------------------");
+
+                    System.out.println("-----------------------------------------------------------------------");
 
                     switch (choice) {
                         case 0:
                             isMenuActive = false;
                             break;
                         case 1:
-                            // Lógica para depositar
+                            System.out.print("Informe o valor que deseja depositar: R$ ");
+                            double amountDeposit = sc.nextDouble();
+                            physicalPerson.deposit(amountDeposit);
+                            System.out.println("-----------------------------------------------------------------------");
                             break;
                         case 2:
-                            // Lógica para sacar
+                            System.out.print("Informe o valor que deseja sacar: R$ ");
+                            double amountWithdraw = sc.nextDouble();
+                            try {
+                                physicalPerson.withdraw(amountWithdraw);
+                            } catch (BusinessException e) {
+                                System.out.println(e.getMessage());
+                            }
+                            System.out.println("-----------------------------------------------------------------------");
                             break;
                         case 3:
-                            // Lógica para consultar saldo
+                            System.out.printf("O atual saldo da conta é: R$ %.2f%n", physicalPerson.getBalance());
+                            System.out.println("-----------------------------------------------------------------------");
                             break;
                         case 4:
-                            // Lógica para consultar dados de usuário
+                            System.out.println(physicalPerson.data());
+                            System.out.println("-----------------------------------------------------------------------");
                             break;
                         default:
                             System.out.println("Opção inválida. Tente novamente.");
-                            System.out.println("--------------------------------------");
+                            System.out.println("-----------------------------------------------------------------------");
                             break;
                     }
                 }
@@ -87,47 +116,65 @@ public class Main {
                 name = sc2.nextLine();
 
                 System.out.print("Saldo inicial que você deseja inserir: ");
-                double balance2 = sc.nextDouble();
+                balance = sc.nextDouble();
 
                 System.out.print("Limite de saque: ");
-                double withdrawLimit2 = sc.nextDouble();
+                withdrawLimit = sc.nextDouble();
+
+                System.out.println("-----------------------------------------------------------------------");
+
+                LegalPerson legalPerson = new LegalPerson(name, balance, withdrawLimit, cnpj, corporateReason);
 
                 while (isMenuActive) {
+                    System.out.println("O que você deseja fazer?");
                     System.out.println("[1] Depositar\n" +
                             "[2] Sacar\n" +
                             "[3] Consultar saldo\n" +
                             "[4] Consultar dados de usuário\n" +
                             "[0] Encerrar");
-                    System.out.println("--------------------------------------");
+
+                    System.out.println("-----------------------------------------------------------------------");
 
                     int choice = sc.nextInt();
-                    System.out.println("--------------------------------------");
+
+                    System.out.println("-----------------------------------------------------------------------");
 
                     switch (choice) {
                         case 0:
                             isMenuActive = false;
                             break;
                         case 1:
-                            // Lógica para depositar
+                            System.out.print("Informe o valor que deseja depositar: R$ ");
+                            double amountDeposit = sc.nextDouble();
+                            legalPerson.deposit(amountDeposit);
+                            System.out.println("-----------------------------------------------------------------------");
                             break;
                         case 2:
-                            // Lógica para sacar
+                            System.out.print("Informe o valor que deseja sacar: R$ ");
+                            double amountWithdraw = sc.nextDouble();
+                            try {
+                                legalPerson.withdraw(amountWithdraw);
+                            } catch (BusinessException e) {
+                                System.out.println(e.getMessage());
+                            }
+                            System.out.println("-----------------------------------------------------------------------");
                             break;
                         case 3:
-                            // Lógica para consultar saldo
+                            System.out.printf("O atual saldo da conta é: R$ %.2f%n", legalPerson.getBalance());
+                            System.out.println("-----------------------------------------------------------------------");
                             break;
                         case 4:
-                            // Lógica para consultar dados de usuário
+                            System.out.println(legalPerson.data());
+                            System.out.println("-----------------------------------------------------------------------");
                             break;
                         default:
                             System.out.println("Opção inválida. Tente novamente.");
-                            System.out.println("--------------------------------------");
+                            System.out.println("-----------------------------------------------------------------------");
                             break;
                     }
                 }
                 break;
         }
-
         sc.close();
         sc2.close();
     }
